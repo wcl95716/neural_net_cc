@@ -6,6 +6,7 @@
 #define TEST_CC_PRO_AD_NODE_H
 
 #include <vector>
+#include <memory>
 
 using std::vector;
 using std::shared_ptr;

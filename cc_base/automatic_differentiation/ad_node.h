@@ -6,8 +6,10 @@
 #define TEST_CC_PRO_AD_NODE_H
 
 #include <vector>
+#include <memory>
 
 using std::vector;
+using std::shared_ptr;
 
 class AdNode {
     double value;
@@ -19,9 +21,9 @@ class AdNode {
     vector<AdNode *> next_node;
 
     //倒序方向
-    vector<std::shared_ptr<AdNode> > last_node_ptr;
+    vector<shared_ptr<AdNode> > last_node_ptr;
     //正序方向
-    vector<std::shared_ptr<AdNode> > next_node_ptr;
+    vector<shared_ptr<AdNode> > next_node_ptr;
 public:
 
     AdNode &operator+(AdNode &x);
