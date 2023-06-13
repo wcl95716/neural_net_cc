@@ -27,6 +27,10 @@ TEST(TestCase, test4) {
 
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
-	std::cout << "sad " << std::endl;
-	return RUN_ALL_TESTS();
+	std::cout << "3463456456456 " << std::endl;
+	std::cout << "3463456456456 " << std::endl;
+	std::cout << "3463456456456 " << std::endl;
+	std::cout << "3463456456456 " << std::endl;
+	std::cout << "3463456456456 " << std::endl;
+	//return RUN_ALL_TESTS();
 }
