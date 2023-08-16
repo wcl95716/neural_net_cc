@@ -29,6 +29,6 @@ target_include_directories(${project_test_name} PRIVATE ${Root_DIR})
 target_include_directories(${project_name} PRIVATE ${Root_DIR})
 
 #测试方法链接库
-target_link_libraries(${project_test_name}  ${project_name} gtest ws2_32 basic_head server)
+target_link_libraries(${project_test_name}  ${project_name} gtest  basic_head server)
 
 

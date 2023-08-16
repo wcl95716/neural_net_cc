@@ -27,7 +27,6 @@ endforeach()
 #批量引用库
 SET(EXTERNAL_LIB
         gtest
-        ws2_32
         )
 
 
