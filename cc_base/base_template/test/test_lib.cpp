@@ -1,6 +1,6 @@
 #include <iostream>
 #include "gtest/gtest.h"
-#include "basic_head/basic_head.h"
+#include "cc_base/basic_head/lib.h"
 
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);

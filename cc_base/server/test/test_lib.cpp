@@ -1,6 +1,4 @@
 #include <iostream>
-#include "basic_head/basic_head.h"
-#include "cpp-httplib/httplib.h"
 #include "../lib.h"
 void SetupUserRoutes() {
     printf("asdasdasd111111111111");

@@ -6,7 +6,7 @@
 #define CC_CODEBASE_BASE
 
 #include <vector>
-#include "basic_head/basic_head.h"
+#include "cc_base/basic_head/lib.h"
 #include <iostream>
 using std::vector;
 void test2();

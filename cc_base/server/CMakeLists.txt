@@ -20,17 +20,15 @@ add_library(${project_name} STATIC lib.h lib.cpp)
 #测试方法
 add_executable(${project_name}_test test/test_lib.cpp)
 
-# 设置上上层目录的路径
-get_filename_component(UPUP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../" ABSOLUTE)
-message("UPUP_DIR" , ${UPUP_DIR})
+# 将工程目录添加到target_include_directories  这样可以方便引用其它文件的库
+get_filename_component(Root_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+
 # 添加上上层目录到包含目录
-target_include_directories(${project_test_name} PRIVATE ${UPUP_DIR})
-target_include_directories(${project_name} PRIVATE ${UPUP_DIR})
+
+target_include_directories(${project_test_name} PRIVATE ${Root_DIR})
+target_include_directories(${project_name} PRIVATE ${Root_DIR})
 
 #测试方法链接库
-target_link_libraries(${project_test_name}  ${project_name} gtest )
+target_link_libraries(${project_test_name}  ${project_name} gtest ws2_32 basic_head server)
 
-# 添加其它需要的库
-target_link_libraries(${project_test_name}  ${project_name}  basic_head  ws2_32 )
 
-#include_directories("../cpp-httplib/httplib.h")
