@@ -128,5 +128,6 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+cc_base/cpp-httplib
 
 
