@@ -2,7 +2,10 @@
 
 cmake_minimum_required(VERSION 3.19)
 #库的名字
-project(cc_base)
+get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+set(project_name  ${PROJECT_NAME})
+project(project_name)
+set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_STANDARD 14)
 

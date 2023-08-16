@@ -5,6 +5,7 @@
 
 
 #include <vector>
+#include "basic_head/lib.h"
 using std::vector;
 
 void asdasd();

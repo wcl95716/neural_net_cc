@@ -28,6 +28,13 @@ get_filename_component(Root_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
 target_include_directories(${project_test_name} PRIVATE ${Root_DIR})
 target_include_directories(${project_name} PRIVATE ${Root_DIR})
 
+# 将工程目录添加到target_include_directories  这样可以方便引用其它文件的库
+get_filename_component(UP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+
+# 添加上上层目录到包含目录
+target_include_directories(${project_test_name} PUBLIC  ${UP_DIR})
+target_include_directories(${project_name} PUBLIC  ${UP_DIR})
+
 #测试方法链接库
 target_link_libraries(${project_test_name}  ${project_name} gtest ws2_32 basic_head server)
 
