@@ -20,24 +20,19 @@ TEST(TestCase, test3) {
 }
 
 void SetupUserRoutes() {
-    printf("asdasdasd111111111111");
-    svr.Get("/user/get", [](const httplib::Request&, httplib::Response& res) {
+    svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
         res.set_content("Get user information", "text/plain");
     });
     // ... 其他User模块的接
 }
 
-
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     BasicHead basic_head;
     basic_head.addNum(2);
-    std::cout << "3463456456456 " << std::endl;
-    std::cout << "3463456456456 " << std::endl;
-    std::cout << "3463456456456 " << std::endl;
-    std::cout << "3463456456456 " << std::endl;
-    std::cout << "3463456456456 " << std::endl;
-    SetupUserRoutes();
-    svr.listen("0.0.0.0", 8080);
-    //return RUN_ALL_TESTS();
+    std::cout << basic_head.getTop() << std::endl;
+    std::cout << "hello world " << std::endl;
+    // SetupUserRoutes();
+    // svr.listen("0.0.0.0", 8080);
+    return RUN_ALL_TESTS();
 }

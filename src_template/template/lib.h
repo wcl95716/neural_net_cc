@@ -7,7 +7,7 @@
 #include <vector>
 using std::vector;
 
-void asdasd();
+void helloWorld();
 
 
 
