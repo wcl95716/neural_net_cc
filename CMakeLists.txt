@@ -91,4 +91,10 @@ message("root : " ${CMAKE_CURRENT_SOURCE_DIR} )
 
 target_link_libraries(test_cc_pro  ${EXTERNAL_LIB}  )
 
+if(APPLE)
+    # macOS 相关设置
+elseif(WIN32)
+    # Windows 相关设置
+    target_link_libraries(test_cc_pro ws2_32)
+endif()
 

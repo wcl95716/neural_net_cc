@@ -39,3 +39,9 @@ target_include_directories(${project_name} PUBLIC  ${UP_DIR})
 target_link_libraries(${project_test_name}  ${project_name} gtest basic_head server)
 
 
+if(APPLE)
+    # macOS 相关设置
+elseif(WIN32)
+    # Windows 相关设置
+    target_link_libraries(${project_test_name}  ${project_name} ws2_32)
+endif()
