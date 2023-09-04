@@ -6,19 +6,67 @@ cmake_minimum_required(VERSION 3.19)
 get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(project_name  ${PROJECT_NAME})
 set(project_test_name  ${PROJECT_NAME}_test)
-#message("PROJECT_NAME: ${PROJECT_NAME}")
-#message("project_name: ${project_name}")
-#message("project_test_name: ${project_test_name}")
+set(project_test_service  ${PROJECT_NAME}_service)
+
 # 设置项目名称
 project(${project_name})
 
 set(CMAKE_CXX_STANDARD 14)
+# Set _WIN32_WINNT value to 0x600 to support Windows Vista and later
+add_definitions(-D_WIN32_WINNT=0x600)
+
+include(FetchContent)
+
+# 获取gRPC库
+FetchContent_Declare(
+        grpc
+        GIT_REPOSITORY https://github.com/grpc/grpc.git
+        GIT_TAG        v1.48.0
+        GIT_SUBMODULES_RECURSE TRUE
+)
+
+FetchContent_GetProperties(grpc)
+if(NOT grpc_POPULATED)
+    FetchContent_Populate(grpc)
+    # 使用gRPC的CMake项目
+    add_subdirectory(${grpc_SOURCE_DIR} ${grpc_BINARY_DIR})
+endif()
+
+# Define your proto files
+set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protos/)
+set(PROTO_FILES ${PROTO_SRC_DIR}/proto_file.proto)
+# 关键配置
+set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:grpc_cpp_plugin>)
+
+foreach(PROTO_FILE ${PROTO_FILES})
+    get_filename_component(PROTO_NAME ${PROTO_FILE} NAME_WE)
+    set(PROTO_SRC ${CMAKE_CURRENT_BINARY_DIR}/${PROTO_NAME}.pb.cc)
+    set(PROTO_HDR ${CMAKE_CURRENT_BINARY_DIR}/${PROTO_NAME}.pb.h)
+    set(GRPC_SRC ${CMAKE_CURRENT_BINARY_DIR}/${PROTO_NAME}.grpc.pb.cc)
+    set(GRPC_HDR ${CMAKE_CURRENT_BINARY_DIR}/${PROTO_NAME}.grpc.pb.h)
+
+    add_custom_command(
+            OUTPUT "${PROTO_SRC}" "${PROTO_HDR}" "${GRPC_SRC}" "${GRPC_HDR}"
+            COMMAND protobuf::protoc
+            ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
+            --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+            -I "${PROTO_SRC_DIR}"
+            --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+            "${PROTO_FILE}"
+            DEPENDS "${PROTO_FILE}")
+endforeach()
+
 
 #设置库
-add_library(${project_name} STATIC lib.h lib.cpp)
+add_library(${project_name} STATIC lib.h lib.cpp  ${PROTO_SRC} ${PROTO_HDR} ${GRPC_SRC} ${GRPC_HDR})
 
 #测试方法
-add_executable(${project_name}_test test/test_lib.cpp)
+#客户端
+add_executable(${project_test_name} test/test_lib.cpp  ${PROTO_SRC} ${PROTO_HDR} ${GRPC_SRC} ${GRPC_HDR})
+#服务端
+add_executable(${project_test_service} service/test_lib.cpp  ${PROTO_SRC} ${PROTO_HDR} ${GRPC_SRC} ${GRPC_HDR})
+
+# target_sources(${project_test_name} PRIVATE ${PROTO_SRC} ${GRPC_SRC})
 
 # 将工程目录添加到target_include_directories  这样可以方便引用其它文件的库
 get_filename_component(Root_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
@@ -28,67 +76,20 @@ get_filename_component(Root_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
 target_include_directories(${project_test_name} PRIVATE ${Root_DIR})
 target_include_directories(${project_name} PRIVATE ${Root_DIR})
 
-
-# Set _WIN32_WINNT value to 0x600 to support Windows Vista and later
-add_definitions(-D_WIN32_WINNT=0x600)
-
-# 添加grpc子模块
-# set(ABSL_ENABLE_INSTALL ON)
-
-include(FetchContent)
-
-set(ABSL_ENABLE_INSTALL ON)
-FetchContent_Declare(
-        absl
-        GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-        GIT_TAG        origin/master
-        OVERRIDE_FIND_PACKAGE
-)
-FetchContent_MakeAvailable(absl)
-
-FetchContent_Declare(
-        gRPC
-        GIT_REPOSITORY https://github.com/grpc/grpc
-        GIT_TAG        v1.48.0
-)
-set(FETCHCONTENT_QUIET OFF)
-FetchContent_MakeAvailable(gRPC)
-
-
-
-
-# Define your proto files
-set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protos)
-message("CMAKE_CURRENT_SOURCE_DIR " ${CMAKE_CURRENT_SOURCE_DIR})
-message("PROTO_SRC_DIR " ${PROTO_SRC_DIR})
-set(PROTO_FILES
-        ${PROTO_SRC_DIR}/proto_file.proto
-)
-
-# Compile your proto files
-foreach(PROTO_FILE ${PROTO_FILES})
-    get_filename_component(PROTO_NAME ${PROTO_FILE} NAME_WE)
-    message("PROTO_NAME " ${PROTO_NAME})
-    get_filename_component(ABS_PROTO ${PROTO_FILE} ABSOLUTE)
-    set(PROTO_SRC ${CMAKE_BINARY_DIR}/${PROTO_NAME}.pb.cc)
-    message("CMAKE_BINARY_DIR " ${CMAKE_BINARY_DIR})
-    set(PROTO_HDR ${CMAKE_BINARY_DIR}/${PROTO_NAME}.pb.h)
-    set(GRPC_SRC ${CMAKE_BINARY_DIR}/${PROTO_NAME}.grpc.pb.cc)
-    set(GRPC_HDR ${CMAKE_BINARY_DIR}/${PROTO_NAME}.grpc.pb.h)
-    add_custom_command(
-            OUTPUT "${PROTO_SRC}" "${PROTO_HDR}" "${GRPC_SRC}" "${GRPC_HDR}"
-            COMMAND protobuf::protoc
-            ARGS --grpc_out "${CMAKE_BINARY_DIR}"
-            --cpp_out "${CMAKE_BINARY_DIR}"
-            -I "${PROTO_SRC_DIR}"
-            --plugin=protoc-gen-grpc="${_gRPC_PROTOC_GRPCPP_PLUGIN_EXECUTABLE}"
-            "${ABS_PROTO}"
-            DEPENDS "${ABS_PROTO}")
-endforeach()
-
-
+target_include_directories(${project_name} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(${project_test_name}  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(${project_test_service}  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 #测试方法链接库
-target_link_libraries(${project_test_name}
+
+target_link_libraries(${project_test_service} ${project_name}
+        gtest
+        basic_head
+        protobuf::libprotobuf
+        grpc
+        grpc++
+        grpc++_reflection )
+
+target_link_libraries(${project_test_name} ${project_name}
         gtest
         basic_head
         protobuf::libprotobuf
@@ -97,8 +98,6 @@ target_link_libraries(${project_test_name}
         grpc++_reflection )
 
 target_link_libraries(${project_name}
-        gtest
-        basic_head
         protobuf::libprotobuf
         grpc
         grpc++
