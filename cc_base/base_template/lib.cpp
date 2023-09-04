@@ -3,6 +3,7 @@
 //
 
 #include "lib.h"
+
 using std::swap;
 
 void test(){
@@ -11,4 +12,11 @@ void test(){
     std::cout<<basic_head.getTop()<<std::endl;
     basic_head.addNum(1);
     std::cout<<basic_head.getTop()<<std::endl;
+}
+
+void SetupUserRoutes() {
+    svr.Get("/user/get", [](const httplib::Request&, httplib::Response& res) {
+        res.set_content("Get user information", "text/plain");
+    });
+    // ... 其他User模块的接
 }
