@@ -83,7 +83,6 @@ target_include_directories(${project_test_service}  PRIVATE ${CMAKE_CURRENT_BINA
 
 target_link_libraries(${project_test_service} ${project_name}
         gtest
-        basic_head
         protobuf::libprotobuf
         grpc
         grpc++
@@ -91,7 +90,6 @@ target_link_libraries(${project_test_service} ${project_name}
 
 target_link_libraries(${project_test_name} ${project_name}
         gtest
-        basic_head
         protobuf::libprotobuf
         grpc
         grpc++
