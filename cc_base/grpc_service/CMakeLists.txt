@@ -101,9 +101,9 @@ target_link_libraries(${project_name}
         grpc++
         grpc++_reflection )
 
-if(APPLE)
-    # macOS 相关设置
-elseif(WIN32)
-    # Windows 相关设置
-    target_link_libraries(${project_test_name}  ${project_name} ws2_32)
-endif()
+#if(APPLE)
+#    # macOS 相关设置
+#elseif(WIN32)
+#    # Windows 相关设置
+#    target_link_libraries(${project_test_name}  ${project_name} ws2_32)
+#endif()
