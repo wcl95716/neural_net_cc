@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "cpp-httplib/httplib.h"
+#include "httplib.h"
 
 extern httplib::Server svr;
 

@@ -40,7 +40,7 @@ int main() {
 
     HelloClient client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
 
-    std::string name = "Panda";
+    std::string name = "Panda2";
     std::string response = client.SayHello(name);
     std::cout << "Received: " << response << std::endl;
 

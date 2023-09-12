@@ -36,6 +36,6 @@ target_include_directories(${project_test_name} PUBLIC  ${UP_DIR})
 target_include_directories(${project_name} PUBLIC  ${UP_DIR})
 
 #测试方法链接库
-target_link_libraries(${project_test_name}  ${project_name} gtest  basic_head server)
+target_link_libraries(${project_test_name}  ${project_name} gtest  )
 
 
