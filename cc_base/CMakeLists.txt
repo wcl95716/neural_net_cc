@@ -19,8 +19,12 @@ file(GLOB subdirectories LIST_DIRECTORIES true ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
 # 遍历子目录并添加为子项目
 foreach(subdirectory ${subdirectories})
-    if(IS_DIRECTORY ${subdirectory})
-        #message("subdirectory " ${subdirectory})
+    if(IS_DIRECTORY ${subdirectory}
+            # 如果下载grpc 注释此行
+            AND NOT ${subdirectory} MATCHES "grpc_service"
+        )
+        message("subdirectory " ${subdirectory})
+
         get_filename_component(subdir_name ${subdirectory} NAME)
         add_subdirectory(${subdirectory} ${CMAKE_BINARY_DIR}/${subdir_name})
     endif()
