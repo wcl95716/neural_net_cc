@@ -63,8 +63,9 @@ foreach(subdir ${SUBDIRECTORIES})
         if(IS_DIRECTORY ${subdir})
             get_filename_component(dirname ${subdir} NAME)
             if(
-                    NOT ${dirname} STREQUAL "googletest" AND
-                    NOT ${dirname} STREQUAL "cpp-httplib"
+                    NOT ${dirname} STREQUAL "googletest"
+                    AND NOT ${dirname} STREQUAL "cpp-httplib"
+                    AND NOT ${dirname} STREQUAL "grpc_service"
             )
                 list(APPEND EXTERNAL_LIB ${dirname})
             endif()
@@ -83,8 +84,6 @@ endforeach()
 add_executable(test_cc_pro main.cpp)
 
 # 将cc_base 引用提一层
-#target_include_directories(test_cc_pro PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cc_base )
-#target_include_directories(test_cc_pro PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src )
 target_include_directories(test_cc_pro INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/ )
 
 message("root : " ${CMAKE_CURRENT_SOURCE_DIR} )
