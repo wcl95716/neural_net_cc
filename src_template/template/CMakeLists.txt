@@ -28,9 +28,6 @@ get_filename_component(UP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
 target_include_directories(${project_test_name} PRIVATE ${Root_DIR}  ${UP_DIR})
 target_include_directories(${project_name} PRIVATE ${Root_DIR}  ${UP_DIR})
 
-## 添加上上层目录到包含目录
-#target_include_directories(${project_test_name} PRIVATE  ${UP_DIR})
-#target_include_directories(${project_name} PRIVATE  ${UP_DIR})
 
 #测试方法链接库
 target_link_libraries(${project_name}  )

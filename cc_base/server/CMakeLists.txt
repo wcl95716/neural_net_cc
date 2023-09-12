@@ -33,7 +33,7 @@ target_include_directories(${project_name} PRIVATE ${Root_DIR}  ${UP_DIR})
 #target_include_directories(${project_name} PRIVATE  ${UP_DIR})
 
 #测试方法链接库
-target_link_libraries(${project_name}  )
+target_link_libraries(${project_name} gtest  httplib )
 target_link_libraries(${project_test_name}  ${project_name} gtest  basic_head server )
 
 if(APPLE)

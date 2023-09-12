@@ -27,6 +27,8 @@
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/*
+.idea
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -126,5 +128,4 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-
 
