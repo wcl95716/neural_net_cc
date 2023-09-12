@@ -1,3 +1,6 @@
-[submodule "cc_base/cpp-httplib"]
-	path = cc_base/cpp-httplib
+[submodule "external/googletest"]
+	path = external/googletest
+	url = https://github.com/google/googletest.git
+[submodule "external/cpp-httplib"]
+	path = external/cpp-httplib
 	url = https://github.com/yhirose/cpp-httplib.git
