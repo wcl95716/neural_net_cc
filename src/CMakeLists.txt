@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD 14)
 #获取当前目录下的所有子目录路径
 file(GLOB subdirectories LIST_DIRECTORIES true
         ${CMAKE_CURRENT_SOURCE_DIR}/*
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../../base
 )
 
 # 遍历子目录并添加为子项目
@@ -19,7 +18,7 @@ foreach(subdirectory ${subdirectories})
     if(IS_DIRECTORY ${subdirectory})
         #message("subdirectory " ${subdirectory})
         get_filename_component(subdir_name ${subdirectory} NAME)
-        add_subdirectory(${subdirectory} ${CMAKE_BINARY_DIR}/${subdir_name})
+        add_subdirectory(${subdirectory})
     endif()
 endforeach()
 
