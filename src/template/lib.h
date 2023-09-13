@@ -5,7 +5,7 @@
 
 
 #include <vector>
-#include "cc_base/basic_head/lib.h"
+#include "base/basic_head/lib.h"
 using std::vector;
 
 void helloWorld();

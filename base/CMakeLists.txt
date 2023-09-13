@@ -9,10 +9,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_STANDARD 14)
 
-#add_subdirectory(basic_head)
-#add_subdirectory(googletest)
-#add_subdirectory(automatic_differentiation)
-#add_subdirectory(test1)
+
 
 #获取当前目录下的所有子目录路径
 file(GLOB subdirectories LIST_DIRECTORIES true ${CMAKE_CURRENT_SOURCE_DIR}/*)
@@ -24,9 +21,12 @@ foreach(subdirectory ${subdirectories})
             AND NOT ${subdirectory} MATCHES "grpc_service"
         )
         message("subdirectory " ${subdirectory})
-
         get_filename_component(subdir_name ${subdirectory} NAME)
-        add_subdirectory(${subdirectory} ${CMAKE_BINARY_DIR}/${subdir_name})
+        add_subdirectory(${subdirectory}  )
+        # 获取子文件夹中的项目名
+        get_directory_property(SUBFOLDER_PROJECT_NAME DIRECTORY ${subdirectory} DEFINITION PROJECT_NAME)
+        message("子文件夹的项目名是: ${SUBFOLDER_PROJECT_NAME}")
+
     endif()
 endforeach()
 
