@@ -15,22 +15,6 @@ set(CMAKE_CXX_STANDARD 14)
 # Set _WIN32_WINNT value to 0x600 to support Windows Vista and later
 add_definitions(-D_WIN32_WINNT=0x600)
 
-include(FetchContent)
-set(ABSL_ENABLE_INSTALL ON)
-# 获取gRPC库
-FetchContent_Declare(
-        grpc
-        GIT_REPOSITORY https://github.com/grpc/grpc.git
-        GIT_TAG        v1.58.0
-        GIT_SUBMODULES_RECURSE TRUE
-)
-
-FetchContent_GetProperties(grpc)
-if(NOT grpc_POPULATED)
-    FetchContent_Populate(grpc)
-    # 使用gRPC的CMake项目
-    add_subdirectory(${grpc_SOURCE_DIR} ${grpc_BINARY_DIR})
-endif()
 
 # Define your proto files
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protos/)

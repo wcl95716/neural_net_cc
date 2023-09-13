@@ -2,6 +2,7 @@
 
 cmake_minimum_required(VERSION 3.19)
 #库的名字
+set(ABSL_ENABLE_INSTALL ON)
 
 get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(project_name  ${PROJECT_NAME})
@@ -16,7 +17,9 @@ file(GLOB subdirectories LIST_DIRECTORIES true
 
 # 遍历子目录并添加为子项目
 foreach(subdirectory ${subdirectories})
-    if(IS_DIRECTORY ${subdirectory})
+    if(IS_DIRECTORY ${subdirectory}
+           # AND NOT ${subdirectory} MATCHES "grpc"
+    )
         #message("subdirectory " ${subdirectory})
         get_filename_component(subdir_name ${subdirectory} NAME)
         add_subdirectory(${subdirectory} ${CMAKE_BINARY_DIR}/${subdir_name})

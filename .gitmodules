@@ -4,3 +4,6 @@
 [submodule "external/cpp-httplib"]
 	path = external/cpp-httplib
 	url = https://github.com/yhirose/cpp-httplib.git
+[submodule "external/grpc"]
+	path = external/grpc
+	url = https://github.com/grpc/grpc.git
