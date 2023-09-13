@@ -19,7 +19,7 @@ foreach(subdirectory ${subdirectories})
     if(IS_DIRECTORY ${subdirectory})
         #message("subdirectory " ${subdirectory})
         get_filename_component(subdir_name ${subdirectory} NAME)
-        add_subdirectory(${subdirectory} ${CMAKE_BINARY_DIR}/${subdir_name})
+        add_subdirectory(${subdirectory})
     endif()
 endforeach()
 
