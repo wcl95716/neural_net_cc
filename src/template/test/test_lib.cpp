@@ -1,7 +1,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
-#include "cc_base/basic_head/lib.h"
-#include "cc_base/server/lib.h"
+#include "base/basic_head/lib.h"
+#include "base/server/lib.h"
 
 int add(int x, int y) {
     return x + y;
