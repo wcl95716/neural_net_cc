@@ -21,7 +21,10 @@ TEST(TestCase, test3) {
 
 void SetupUserRoutes() {
     svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-        res.set_content("Get user information", "text/plain");
+        res.set_content("Get user information  111111  ", "text/plain");
+    });
+    svr.Get("/test", [](const httplib::Request&, httplib::Response& res) {
+        res.set_content(" 22222  ", "text/plain");
     });
     // ... 其他User模块的接
 }
