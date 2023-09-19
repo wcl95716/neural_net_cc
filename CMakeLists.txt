@@ -5,8 +5,6 @@ project(test_cc_pro)
 
 set(CMAKE_CXX_STANDARD 14)
 
-
-
 # 将目录种所有库添加
 #add_subdirectory(base)
 #add_subdirectory(src)
@@ -32,21 +30,6 @@ SET(EXTERNAL_LIB
         gtest
         )
 
-
-#file(GLOB SUBDIRECTORIES "./base/*")
-#
-#foreach(subdir ${SUBDIRECTORIES})
-#    if(IS_DIRECTORY ${subdir})
-#        get_filename_component(dirname ${subdir} NAME)
-#        message("dirname " ${dirname})
-#        if(
-#                NOT ${dirname} STREQUAL "googletest" AND
-#                NOT ${dirname} STREQUAL "cpp-httplib"
-#        )
-#            list(APPEND EXTERNAL_LIB ${dirname})
-#        endif()
-#    endif()
-#endforeach()
 
 
 file(GLOB SUBDIRECTORIES "./*")
