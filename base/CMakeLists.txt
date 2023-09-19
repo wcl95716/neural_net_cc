@@ -21,8 +21,8 @@ foreach(subdirectory ${subdirectories})
         get_filename_component(subdir_name ${subdirectory} NAME)
         add_subdirectory(${subdirectory}  )
         # 获取子文件夹中的项目名
-        get_directory_property(SUBFOLDER_PROJECT_NAME DIRECTORY ${subdirectory} DEFINITION PROJECT_NAME)
-        # message("子文件夹的项目名是: ${SUBFOLDER_PROJECT_NAME}")
+#        get_directory_property(SUBFOLDER_PROJECT_NAME DIRECTORY ${subdirectory} DEFINITION PROJECT_NAME)
+#        message("子文件夹的项目名是: ${SUBFOLDER_PROJECT_NAME}")
     endif()
 endforeach()
 
