@@ -5,8 +5,6 @@
 #include "lib.h"
 using std::swap;
 
-httplib::Server svr;
-
 // 构造函数实现
 HttpServer::HttpServer() {
     svr.Get("/hi", [](const httplib::Request&, httplib::Response& res) {
