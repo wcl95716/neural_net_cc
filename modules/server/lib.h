@@ -1,16 +1,36 @@
-//
-// Created by Panda on 2021/6/21.
-//
+#include <httplib.h>
+#include <unordered_set>
+#include <string>
+#include <mutex>
 
-#ifndef CC_CODEBASE_BASE_server
-#define CC_CODEBASE_BASE_server
+class HttpServer {
 
-#pragma once
+private:
+    // httplib 库中的 Server 类
+    httplib::Server svr;
+    // 用于记录已注册的路由
+    std::unordered_set<std::string> registeredPaths;
+    // 多线程中 用于保护 registeredPaths 的互斥量  
+    std::mutex mtx;
 
-#include "httplib.h"
+    HttpServer();
 
-extern httplib::Server svr;
+    // 禁止拷贝构造和赋值
+    HttpServer(const HttpServer&) = delete;
+    HttpServer& operator=(const HttpServer&) = delete;
 
-#endif //CC_CODEBASE_LIB
+public:
+    enum HttpMethod {
+        GET,
+        POST,
+        PUT,
+        DELETE
+        // ...可以继续添加其他HTTP方法
+    };
 
+    static HttpServer& getInstance();
 
+    bool addRoute(HttpMethod method, const char* path, const httplib::Server::Handler& handler );
+    void listen(const char* host, int port);
+
+};
