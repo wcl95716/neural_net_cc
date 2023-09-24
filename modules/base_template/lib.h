@@ -11,7 +11,6 @@
 using std::vector;
 
 void test();
-void SetupUserRoutes();
 
 
 
