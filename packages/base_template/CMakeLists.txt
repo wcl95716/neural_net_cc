@@ -21,14 +21,18 @@ target_include_directories(${PACKAGE_NAME}
 )
 
 # 创建测试
+enable_testing()
 add_executable(${PACKAGE_NAME}_test test/test_lib.cpp)
-
-# 设置测试的包含目录
 target_include_directories(${PACKAGE_NAME}_test PRIVATE include)
+target_link_libraries(${PACKAGE_NAME}_test
+    PRIVATE
+        gtest
+        gtest_main
+        pthread
+        ${PACKAGE_NAME}
+)
+add_test(NAME ${PACKAGE_NAME}_test COMMAND ${PACKAGE_NAME}_test)
 
-# 链接依赖
-target_link_libraries(${PACKAGE_NAME} server)
-target_link_libraries(${PACKAGE_NAME}_test ${PACKAGE_NAME} gtest basic_custom_heap server)
 
 # 平台特定设置
 if(WIN32)

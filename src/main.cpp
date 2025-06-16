@@ -1,9 +1,11 @@
 #include <iostream>
-#include "core/basic_custom_heap/lib.h"
-#include "core/server/lib.h"
+#include "base_template.h"
 
-using namespace  std;
+using namespace std;
 int main()
 {
-    cout<<"asd"<<endl;
+    // 使用 base 的功能
+    test();
+    
+    return 0;
 }
