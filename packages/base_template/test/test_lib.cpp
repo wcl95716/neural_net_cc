@@ -6,7 +6,7 @@
 TEST(BaseTemplateTest, TestFunction) {
 	// 这里可以添加测试代码
 	// 由于 test() 只是打印，我们可以测试它不会崩溃
-	EXPECT_NO_THROW(test());
+	EXPECT_NO_THROW(base_template::test());
 }
 
 int main(int argc, char **argv) {

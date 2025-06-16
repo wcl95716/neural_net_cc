@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     // 使用 base 的功能
-    test();
+    base_template::test();
     
     return 0;
 }

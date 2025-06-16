@@ -2,4 +2,5 @@
 
 #include <iostream>
 
-void test(); 
+
+void test();
