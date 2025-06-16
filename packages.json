@@ -1,0 +1,9 @@
+{
+    "name": "neural_net_cc",
+    "version": "1.0.0",
+    "dependencies": {
+        "base_template": "^1.0.0",
+        "server": "^1.0.0",
+        "basic_custom_heap": "^1.0.0"
+    }
+} 
