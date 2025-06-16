@@ -16,8 +16,8 @@ foreach(PACKAGE_DIR ${PACKAGE_DIRS})
         get_filename_component(PACKAGE_NAME ${PACKAGE_DIR} NAME)
         if(NOT ${PACKAGE_NAME} STREQUAL "googletest")
             add_subdirectory(${PACKAGE_DIR})
-            # 自动添加包的包含路径
-            include_directories(${PACKAGE_DIR}/include)
+            # # 自动添加包的包含路径
+            # include_directories(${PACKAGE_DIR}/include)
             # 收集所有包名
             list(APPEND ALL_PACKAGES ${PACKAGE_NAME})
         endif()

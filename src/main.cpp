@@ -1,5 +1,6 @@
 #include <iostream>
-#include "base_template.h"
+//#include "base_template.h"
+#include "../private/base_template.h"
 
 using namespace std;
 int main()

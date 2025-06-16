@@ -16,8 +16,11 @@ add_library(${PACKAGE_NAME} STATIC
 
 # 设置包含目录
 target_include_directories(${PACKAGE_NAME}
-    PUBLIC include
-    PRIVATE src
+    INTERFACE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/public  # 对外暴露 public 目录
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/private  # 内部头文件对库本身可见
 )
 
 # 创建测试
