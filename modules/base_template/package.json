@@ -1,0 +1,11 @@
+{
+    "name": "base_template",
+    "version": "1.0.0",
+    "description": "基础模板包",
+    "dependencies": {
+        "server": "^1.0.0",
+        "basic_custom_heap": "^1.0.0"
+    },
+    "author": "Panda",
+    "license": "MIT"
+} 
