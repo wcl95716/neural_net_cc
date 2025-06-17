@@ -6,8 +6,6 @@
 
 #include <vector>
 #include <iostream>
-#include "basic_head/lib.h"
-#include "server/lib.h"
 using std::vector;
 
 void test();

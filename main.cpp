@@ -1,6 +1,6 @@
 #include <iostream>
-#include "modules/basic_head/lib.h"
-#include "modules/server/lib.h"
+#include "modules/base_template/lib.h"
+
 
 using namespace  std;
 int main()
